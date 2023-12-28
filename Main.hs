@@ -1,37 +1,20 @@
-newtype Html = Html String
-newtype Document = Document Html
+import Html
 
-head_ :: String -> String
-head_ content = "<head>" <> content <> "</head>"
-
-title_ :: String -> String
-title_ content = "<title>" <> content <> "</title>"
-
-body_ :: String -> String
-body_ content = "<body>" <> content <> "</body>"
-
-h1_ :: String -> String
-h1_ content = "<h1>" <> content <> "</h1>"
-
-p_ :: String -> String
-p_ content = "<p>" <> content <> "</p>"
-
-html_ :: String -> String
-html_ content = "<html>" <> content <> "</html>"
-
-doctype_ :: String
-doctype_ = "<!DOCTYPE html>"
-
-makeHtml :: String -> String -> String
-makeHtml title body = doctype_ <>
+createPage :: String -> String -> Html
+createPage title body =
+  doctype_ &
   html_ (
     head_ (
-      title_ title
-    ) <>
+      title_ (raw_ title)
+    ) &
     body_ (
-      h1_ title <>
-      p_ body
+      h1_ (raw_ title) &
+      p_ (raw_ body) &
+      orderedList_ [
+        raw_ "Point 1. You suck.",
+        raw_ "Point 2. I suck."
+      ]
     )
   )
 
-main = putStrLn (makeHtml "Hspage" "Hello?")
+main = putStrLn (render_ (createPage "Hspage" "Hello?"))
