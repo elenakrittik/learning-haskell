@@ -1,41 +1,40 @@
 module Html.Internal where
 
+newtype Document = Document Html
 newtype Html = Html String
 
 (&) :: Html -> Html -> Html
 (Html a) & (Html b) = Html (a <> b)
 
-newtype Document = Document Html
-
 head_ :: Html -> Html
-head_ content = wrap_ content "head"
+head_ = wrap_ "head"
 
 title_ :: Html -> Html
-title_ content = wrap_ content "title"
+title_ = wrap_ "title"
 
 body_ :: Html -> Html
-body_ content = wrap_ content "body"
+body_ = wrap_ "body"
 
 h1_ :: Html -> Html
-h1_ content = wrap_ content "h1"
+h1_ = wrap_"h1"
 
 p_ :: Html -> Html
-p_ content = wrap_ content "p"
+p_ = wrap_ "p"
 
 pre_ :: Html -> Html
-pre_ content = wrap_ content "pre"
+pre_ = wrap_ "pre"
 
 ul_ :: Html -> Html
-ul_ content = wrap_ content "ul"
+ul_ = wrap_ "ul"
 
 ol_ :: Html -> Html
-ol_ content = wrap_ content "ol"
+ol_ = wrap_ "ol"
 
 li_ :: Html -> Html
-li_ content = wrap_ content "li"
+li_ = wrap_ "li"
 
 html_ :: Html -> Html
-html_ content = wrap_ content "html"
+html_ = wrap_ "html"
 
 raw_ :: String -> Html
 raw_ = Html . escape_
@@ -46,8 +45,8 @@ doctype_ = Html "<!DOCTYPE html>"
 render_ :: Html -> String
 render_ (Html a) = a
 
-wrap_ :: Html -> String -> Html
-wrap_ content elem = Html ("<" <> elem <> ">") & content & Html ("</" <> elem <> ">")
+wrap_ :: String -> Html -> Html
+wrap_ elem content = Html ("<" <> elem <> ">") & content & Html ("</" <> elem <> ">")
 
 escape_ :: String -> String
 escape_ =
