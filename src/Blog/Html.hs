@@ -1,4 +1,5 @@
-module Html (
+-- | Stable interface for Blog.Html.Internal. Includes a few utilities.
+module Blog.Html (
   Html,
   Document,
   doctype_,
@@ -21,7 +22,7 @@ module Html (
   orderedList_,
 ) where
 
-import Html.Internal
+import Blog.Html.Internal
 
 code_ :: Html -> Html
 code_ = pre_

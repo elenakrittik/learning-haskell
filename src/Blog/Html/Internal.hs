@@ -1,4 +1,5 @@
-module Html.Internal where
+{-# LANGUAGE InstanceSigs #-}
+module Blog.Html.Internal where
 
 newtype Document = Document Html
 newtype Html = Html String
@@ -6,6 +7,10 @@ newtype Html = Html String
 (&) :: Html -> Html -> Html
 (Html a) & (Html b) = Html (a <> b)
 
+instance Semigroup Html where
+  (<>) :: Html -> Html -> Html
+  (Html a) <> (Html b) = Html ( a <> b)
+-- 
 head_ :: Html -> Html
 head_ = wrap_ "head"
 

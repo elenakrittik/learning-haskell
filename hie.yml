@@ -1,0 +1,13 @@
+cradle:
+  stack:
+    - path: "./src"
+      component: "blog:lib"
+
+    - path: "./app/Main.hs"
+      component: "blog:exe:blog-exe"
+
+    - path: "./app/Paths_blog.hs"
+      component: "blog:exe:blog-exe"
+
+    - path: "./test"
+      component: "blog:test:blog-test"
